@@ -6,11 +6,11 @@ static	NLSocket	_NL_Socket_To_Server;
 static	NLSockAddr	_NL_Addr_To_Server;
 
 /*
- *	create a client and connect to a server
+ *	create a tcp-client and connect to a server
  */
 // create [9/22/2016 blue]
 NLSocket
-nlClientCreate(
+nlClientTcp(
 _In_	int		_af,
 _In_	int		_type,
 _In_	int		_proto,
@@ -21,7 +21,7 @@ _In_	short	_port)
 	nlSocket(sock,_af,_type,_proto);
 
 	// set addr
-	nlSock4(addr, _af, 0, _port);
+	nlSockAddr4(addr, _af, 0, _port);
 	inet_pton(_af,_ip,&addr.sin_addr);
 
 

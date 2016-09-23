@@ -1,4 +1,4 @@
-#include "..\inc\nl.h"
+#include "../inc/nl.h"
 
 NL_Status	_NL_Current_Status;		// the status of function
 

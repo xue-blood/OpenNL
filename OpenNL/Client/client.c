@@ -51,7 +51,7 @@ void main()
 	if (!nlInit(2, 0))	{ nlShowError();	return; }	// init win-sock for windows
 
 
-	NLSocket sock = nlClientCreate(AF_INET, SOCK_STREAM, 0, "127.0.0.1", PORT);
+	NLSocket sock = nlClientTcp(AF_INET, SOCK_STREAM, 0, "127.0.0.1", PORT);
 	
 	nlFuncConnectFail(con);
 	nlFuncConnectSuccess(coned);

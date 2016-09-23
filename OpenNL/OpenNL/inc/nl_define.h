@@ -18,6 +18,7 @@ typedef struct sockaddr		NLSockAddr,		*PNLSockAddr;
 typedef struct sockaddr_in	NLSockAddr4,	*PNLSockAddr4;
 typedef struct sockaddr_in6 NLSockAddr6,	*PNLSockAddr6;
 
+typedef struct hostent		NLHost,			*PNLHost;
 
 
 // socket 
@@ -26,7 +27,15 @@ typedef	SOCKET				NLSocket;
 #elif __linux__
 typedef int					NLSocket;
 #define SOCKET_ERROR		(-1)
+#define Sleep		sleep
+#define scanf_s		scanf
 #endif // WIN32
+
+#ifndef _In_
+#define _In_
+#define _Out_
+#define _Inout_
+#endif
 
 
 typedef enum _NL_Status

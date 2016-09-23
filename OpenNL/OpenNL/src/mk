@@ -1,0 +1,12 @@
+echo "compile use gcc"
+gcc -c link.c			-o link.o
+gcc -c nl.c				-o nl.o
+gcc -c nl_callback.c	-o nl_callback.o
+gcc -c nl_client.c		-o nl_client.o
+gcc -c nl_error.c		-o nl_error.o
+gcc -c nl_server.c		-o nl_server.o
+gcc -c nl_socket.c		-o nl_socket.o
+#
+echo "build static library"
+ar rcs nl.a	*.o
+mv ./nl.a ../../Debug/nl.a

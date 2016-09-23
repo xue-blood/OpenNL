@@ -60,4 +60,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="src\mk">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

@@ -38,7 +38,7 @@ bool acce(NLSocket sock, PNLSockAddr addr)
 		send(sock, t_msg, strlen(t_msg), 0);
 	}
 
-	closesocket(sock);
+	nlClose(sock);
 }
 void main()
 {
@@ -47,7 +47,7 @@ void main()
 	if (!nlInit(2, 0))	{	nlShowError();	return;}	// init win-sock for windows
 #endif
 
-	NLSocket	sk_server = nlServerCreate(AF_INET, SOCK_STREAM, 0, 9000,1);
+	NLSocket	sk_server = nlServerTcp(AF_INET, SOCK_STREAM, 0, 9000,1);
 	if (!sk_server)
 	{
 		nlShowError();
@@ -60,7 +60,7 @@ void main()
 	nlServerLoop();
 
 
-	closesocket(sk_server);
+	nlClose(sk_server);
 
 	nlUnInit();
 }

@@ -2,13 +2,27 @@
 #include <windows.h>
 #include <stdbool.h>
 #include <assert.h>
+#elif __linux__
+#include <assert.h>
+#include <stdbool.h>
+#include <stdlib.h>
 #endif // WIN32
 
+#ifndef _In_
+#define _In_
+#define _Out_
+#define _Inout_
+#endif
+
+#ifndef bool
+typedef unsigned char bool;
+#define true	1
+#define false	0
+#endif
 
 typedef	void *		pvoid;
 typedef long long	id;
-typedef	size_t		num;
-
+typedef	size_t		num, size;
 /*
 *	link list
 */
@@ -18,12 +32,12 @@ typedef	struct _Link
 	struct _Link * FLink;
 }Link, *PLink;
 
-#define assertp(ptr)		assert(ptr != NULL)
+#define assertp		assert
 /*
 *	memory
 */
-#define	memzero(ptr,size)	memset(ptr,0,size)
-#define memfree(ptr)		if(ptr) free(ptr),ptr=NULL;
+#define	memzero(ptr,size)	memset((ptr),0,size)
+#define memfree(ptr)		if(ptr) free(ptr),(ptr)=NULL;
 
 /*
 *	see link.c

@@ -9,7 +9,7 @@ static	NLSockAddr	_NL_Addr_To_Client;
  */
 // create [9/22/2016 blue]
 NLSocket
-nlServerCreate(
+nlServerTcp(
 _In_	int		_af,
 _In_	int		_type,
 _In_	int		_proto,
@@ -24,7 +24,7 @@ _In_	int		_backlog)
 	/*
 	 *	set sock address
 	 */
-	nlSock4(addr, _af, INADDR_ANY, _port);
+	nlSockAddr4(addr, _af, INADDR_ANY, _port);
 
 
 	/*
@@ -86,4 +86,48 @@ nlServerLoop()
 	 */
 	if (_NL_Function_Accept_Success)
 		_NL_Function_Accept_Success(_NL_Socket_To_Client, &_NL_Addr_To_Client);
+}
+
+/*
+ *	create a udp-server
+ */
+// create [9/23/2016 blue]
+NLSocket
+nlServerUdp(
+_In_	int		_af,
+_In_	int		_type,
+_In_	int		_proto,
+_In_	short	_port)
+{
+	/*
+	*	create a socket
+	*/
+	nlSocket(sock, _af, _type, _proto);
+
+	/*
+	*	set sock address
+	*/
+	nlSockAddr4(addr, _af, INADDR_ANY, _port);
+
+
+	/*
+	*	set socket option
+	*	 only on linux
+	*/
+#ifdef __linux__
+	int opt = 1;
+	setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
+#endif // __linux__
+
+	/*
+	*	binding the socket
+	*/
+	if (bind(sock, (PNLSockAddr)&addr, sizeof(addr)) == -1)
+	{
+		_NL_Current_Status = NL_Bind_Failed;
+		return false;
+	}
+
+	// now we return the socket
+	return sock;
 }

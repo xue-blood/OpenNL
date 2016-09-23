@@ -22,13 +22,13 @@
 /*
  *	see nl.c
  */
-#ifdef WIN32
 bool	nlInit(_In_	int  v_maj, _In_	int  v_sub);
+
+#ifdef WIN32
 #define nlUnInit		WSACleanup
 #define nlClose(sock)			if(sock != SOCKET_ERROR) closesocket(sock),sock=SOCKET_ERROR
 #else
-#define nlInit(a,b)		true
-#define nlUnInit
+#define nlUnInit()
 #define nlClose(sock)			if(sock != SOCKET_ERROR) close(sock),sock=SOCKET_ERROR
 #endif // WIN32
 
@@ -39,7 +39,7 @@ bool	nlInit(_In_	int  v_maj, _In_	int  v_sub);
 				_NL_Current_Status = NL_Socket_Create_Failed;	\
 				return false;									\
 			}
-#define nlSock4(name,af,ip,port)				\
+#define nlSockAddr4(name,af,ip,port)				\
 			NLSockAddr4 name = { 0 };				\
 			name.sin_family = af;				\
 			name.sin_addr.s_addr = ip;			\
@@ -55,12 +55,14 @@ NL_Status	nlGetError();
 /*
  *	see nl_server.c
  */
-NLSocket	nlServerCreate(_In_	int		_af, _In_	int		_type, _In_	int		_proto, _In_	short	_port, _In_	int		_backlog);
+NLSocket	nlServerTcp(_In_	int		_af, _In_	int		_type, _In_	int		_proto, _In_	short	_port, _In_	int		_backlog);
 void		nlServerLoop();
+NLSocket	nlServerUdp(_In_	int		_af,_In_	int		_type,_In_	int		_proto,_In_	short	_port);
+
 /*
  *	see nl_client.c
  */
-NLSocket	nlClientCreate(_In_	int		_af, _In_	int		_type, _In_	int		_proto, _In_	char*		_ip, _In_	short	_port);
+NLSocket	nlClientTcp(_In_	int		_af, _In_	int		_type, _In_	int		_proto, _In_	char*		_ip, _In_	short	_port);
 void		nlClientLoop();
 
 /*
