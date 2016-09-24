@@ -21,6 +21,7 @@ typedef struct sockaddr_in6 NLSockAddr6,	*PNLSockAddr6;
 typedef struct hostent		NLHost,			*PNLHost;
 
 
+
 // socket 
 #ifdef WIN32
 typedef	SOCKET				NLSocket;

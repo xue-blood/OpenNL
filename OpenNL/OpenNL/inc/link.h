@@ -22,7 +22,13 @@ typedef unsigned char bool;
 
 typedef	void *		pvoid;
 typedef long long	id;
-typedef	size_t		num, size;
+typedef	size_t		num;
+#ifdef WIN32
+typedef size_t		size;
+#else
+typedef int			size;
+#endif
+
 /*
 *	link list
 */

@@ -92,9 +92,6 @@
     <ClCompile Include="src\nl_server.c" />
     <ClCompile Include="src\nl_socket.c" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="src\mk" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
