@@ -4,6 +4,8 @@
 #ifndef NL_H
 #define NL_H
 
+#include "nl_fdset.h"
+
 extern	NL_Status	_NL_Current_Status;	// extern from nl_error.c
 
 

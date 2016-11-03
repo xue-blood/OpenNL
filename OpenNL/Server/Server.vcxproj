@@ -10,6 +10,9 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="server_tcp_io.c" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E88D8130-16B4-4E90-BEF7-D8C8852C14B0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>

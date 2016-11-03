@@ -108,7 +108,7 @@ _Inout_ pvoid	_linkEntry)
 	//
 	// is the link list is empty
 	//
-	if (n->FLink->FLink == n->FLink)
+	if (n->FLink == n)
 		return true;
 	else
 		return false;

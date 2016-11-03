@@ -9,7 +9,7 @@ typedef struct _NlFdData
 	NLSocket	Fd;
 	FdCallback	Callback;
 	pvoid		param;
-}NlFdData,*PNlFdData;
+}NlFdData,*PNLFdData;
 
 typedef struct _NLFd
 {
@@ -20,4 +20,5 @@ typedef struct _NLFd
 void	nlFdInit(_Inout_	PNLFd	nlfd);
 void	nlFdUninit(_Inout_	PNLFd	nlfd);
 void	nlFdAdd(_Inout_	PNLFd	nlfd,NLSocket fd, bool(*callback)(pvoid), pvoid param);
+void	nlFdRemove(_Inout_		PNLFd		nlfd,_In_		NLSocket	fd);
 void	nlFdLoop(_In_	PNLFd	nlfd);

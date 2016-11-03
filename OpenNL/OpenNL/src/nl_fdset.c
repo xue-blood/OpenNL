@@ -25,9 +25,10 @@ nlFdAdd(PNLFd nlfd,NLSocket fd, bool(*callback)(pvoid),pvoid param)
 	/*
 	 *	store callback
 	 */
-	PNlFdData f = (PNlFdData)malloc(sizeof(NlFdData));
+	PNLFdData f = (PNLFdData)malloc(sizeof(NlFdData));
 	f->Callback = callback;
 	f->Fd = fd;
+	f->param = param;
 	linkInsertTail(&nlfd->Data, f);
 	
 	FD_SET(fd, &nlfd->FdSet_In);
@@ -35,18 +36,37 @@ nlFdAdd(PNLFd nlfd,NLSocket fd, bool(*callback)(pvoid),pvoid param)
 	nlfd->MaxFd += fd;
 }
 
+void
+nlFdRemove(
+_Inout_		PNLFd		nlfd, 
+_In_		NLSocket	fd)
+{
+	PNLFdData p = (PNLFdData)nlfd->Data.BLink;
+	while (!linkIsHead(p,&nlfd->Data))
+	{
+		if (p->Fd == fd)
+		{
+			linkRemoveEntry(p);
+			free(p); p = NULL;
+			return;
+		}
+
+		p = (PNLFdData)p->_link.BLink;
+	}
+}
+
 void nlFdReload(PNLFd nlfd)
 {
 	FD_ZERO(&nlfd->FdSet_In);
 
 	int max = 0;
-	PNlFdData p = (PNlFdData)nlfd->Data.BLink;
+	PNLFdData p = (PNLFdData)nlfd->Data.BLink;
 	while (!linkIsHead(p, &nlfd->Data))
 	{
 		if (p->Fd > max) max = p->Fd;
 		FD_SET(p->Fd, &nlfd->FdSet_In);
 
-		p = (PNlFdData)p->_link.BLink;
+		p = (PNLFdData)p->_link.BLink;
 	}
 
 	nlfd->MaxFd = max + 1;
@@ -72,7 +92,7 @@ nlFdLoop(_In_ PNLFd nlfd)
 
 		//printf("select [ %d ]ok.\n",status);
 
-		PNlFdData p = (PNlFdData)nlfd->Data.BLink;
+		PNLFdData p = (PNLFdData)nlfd->Data.BLink;
 		while (!linkIsHead(p, &nlfd->Data))
 		{
 			if (FD_ISSET(p->Fd, &nlfd->FdSet_In))
@@ -82,11 +102,17 @@ nlFdLoop(_In_ PNLFd nlfd)
 				{
 					bool ret = p->Callback(p->param);
 
-					if (!ret)	goto _select_end;
+					if (!ret)
+					{
+						PNLFdData next = (PNLFdData)p->_link.BLink;
+						nlFdRemove(nlfd, p->Fd);
+						p = next;
+						continue;
+					}
 				}
 			}
-
-			p=(PNlFdData)p->_link.BLink;
+			
+			p=(PNLFdData)p->_link.BLink;
 		}
 
 		//printf("one loop end.\n");

@@ -27,9 +27,9 @@ bool	coned(NLSocket sock, PNLSockAddr addr)
 	char name[100];
 
 	// name
-	printf("you name:");
-	scanf("%s",name);
-	send(sock,name,strlen(name),0);
+	//printf("you name:");
+	//scanf("%s",name);
+	//send(sock,name,strlen(name),0);
 
 
 	while (true)

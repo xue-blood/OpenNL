@@ -26,7 +26,6 @@ bool input(pvoid param)
 }
 
 bool msged(pvoid param)
-
 {
 	char buff[100]={0};
 
@@ -77,7 +76,6 @@ bool main(int argc,char ** argv)
 
 	nlFdInit(&nlfd);
 
-	nlFdAdd(&nlfd,fileno(stdin), input, NULL);// add send callback
 	nlFdAdd(&nlfd,sock, msged, NULL);			// add receive callback
 	nlFdAdd(&nlfd,fileno(stdin), input, NULL);// add send callback
 
