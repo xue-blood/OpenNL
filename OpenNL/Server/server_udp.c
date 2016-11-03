@@ -9,7 +9,7 @@
 
 
 
-void dmain()
+void main()
 {
 	nlInit(2, 0);
 

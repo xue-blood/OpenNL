@@ -15,10 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="client.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="client1.c">
+    <ClCompile Include="client_udp_io.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,34 +1,8 @@
-#ifdef WIN32
-#include <windows.h>
-#include <stdbool.h>
-#include <assert.h>
-#elif __linux__
-#include <assert.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#endif // WIN32
+#include "define.h"
 
-#ifndef _In_
-#define _In_
-#define _Out_
-#define _Inout_
-#endif
 
-#ifndef bool
-typedef unsigned char bool;
-#define true	1
-#define false	0
-#endif
-
-typedef	void *		pvoid;
-typedef long long	id;
-typedef	size_t		num;
-#ifdef WIN32
-typedef size_t		size;
-#else
-typedef int			size;
-#endif
-
+#ifndef _LINK_H_
+#define _LINK_H_
 /*
 *	link list
 */
@@ -63,3 +37,7 @@ bool	linkRemoveEntry(_Inout_ pvoid _linkEntry);
 void	linkClear(_Inout_	PLink	_link_head);
 #define linkData(pointer)	(char*)((char*)pointer+sizeof(Link))						// get the date field pointer 
 #define linkEntry(link_pointer,type,member) ((type*)((char*)pointer)-&((type*)0)->member))	// get the struct pointer from a member
+
+
+
+#endif

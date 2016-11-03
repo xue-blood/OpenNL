@@ -71,21 +71,25 @@ nlServerLoop()
 	if (_NL_Socket_Server == SOCKET_ERROR)
 		return;
 
+	while (true)
+	{
+		/*
+		 *	wait for client
+		 */
+		int len = sizeof(_NL_Addr_To_Client);
+		_NL_Socket_To_Client = accept(_NL_Socket_Server, &_NL_Addr_To_Client, &len);
 
-	/*
-	 *	wait for client
-	 */
-	int len = sizeof(_NL_Addr_To_Client);
-	_NL_Socket_To_Client = accept(_NL_Socket_Server, &_NL_Addr_To_Client, &len);
+		if (_NL_Socket_Server == SOCKET_ERROR)
+			continue;
 
-	if (_NL_Socket_Server == SOCKET_ERROR)
-		return;
+		/*
+		 *	then call the function
+		 */
+		if (_NL_Function_Accept_Success)	// exist callback
+			if (!_NL_Function_Accept_Success(_NL_Socket_To_Client, &_NL_Addr_To_Client))	// callback return true is ok
+				break;
 
-	/*
-	 *	then call the function
-	 */
-	if (_NL_Function_Accept_Success)
-		_NL_Function_Accept_Success(_NL_Socket_To_Client, &_NL_Addr_To_Client);
+	}
 }
 
 /*

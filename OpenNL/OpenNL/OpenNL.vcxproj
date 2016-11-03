@@ -76,12 +76,16 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="inc\define.h" />
+    <ClInclude Include="inc\nl_fdset.h" />
     <ClInclude Include="inc\link.h" />
     <ClInclude Include="inc\nl.h" />
     <ClInclude Include="inc\nl_define.h" />
     <ClInclude Include="inc\nl_function.h" />
     <ClInclude Include="inc\nl_pre.h" />
     <ClInclude Include="inc\nl_struct.h" />
+    <ClInclude Include="inc\ps.h" />
+    <ClInclude Include="inc\thread.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\link.c" />
@@ -89,8 +93,11 @@
     <ClCompile Include="src\nl_callback.c" />
     <ClCompile Include="src\nl_client.c" />
     <ClCompile Include="src\nl_error.c" />
+    <ClCompile Include="src\nl_fdset.c" />
     <ClCompile Include="src\nl_server.c" />
     <ClCompile Include="src\nl_socket.c" />
+    <ClCompile Include="src\ps.c" />
+    <ClCompile Include="src\thread.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,5 @@
 #include "../inc/nl.h"
 
-link(_Client_Function);	// store function for client loop
 
 static	NLSocket	_NL_Socket_To_Server;
 static	NLSockAddr	_NL_Addr_To_Server;

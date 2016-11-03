@@ -29,16 +29,24 @@ bool acce(NLSocket sock, PNLSockAddr addr)
 
 	while (true)
 	{
+		/*
+		 *	receive
+		 */
 		memzero(msg, sizeof(msg));
 		recv(sock, msg, sizeof(msg), 0);
+		
+		printf("receive : %s\n", msg);
 
+		/*
+		 *	send
+		 */
 		memzero(t_msg, sizeof(t_msg));
 		convert(msg, t_msg, strlen(msg));
 
+		printf("send : %s\n", t_msg);
+
 		send(sock, t_msg, strlen(t_msg), 0);
 	}
-
-	nlClose(sock);
 }
 void main()
 {

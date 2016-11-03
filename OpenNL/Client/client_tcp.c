@@ -24,20 +24,31 @@ bool	coned(NLSocket sock, PNLSockAddr addr)
 	recv(sock, r_msg, sizeof(r_msg), 0);
 
 	printf("%s\n", r_msg);
+	char name[100];
+
+	// name
+	printf("you name:");
+	scanf("%s",name);
+	send(sock,name,strlen(name),0);
+
 
 	while (true)
 	{
+
 		memzero(s_msg, sizeof(s_msg));
 		memzero(r_msg, sizeof(r_msg));
 
-		printf("input:");
+		printf("send:");
 		scanf_s("%s", s_msg, sizeof(s_msg));
 
 		send(sock, s_msg, strlen(s_msg), 0);
 
+		if (strcmp(s_msg, "exit") == 0)
+			break;
+
 		recv(sock, r_msg, sizeof(r_msg), 0);
 
-		printf("output:%s\n", r_msg);
+		printf("receive:%s\n", r_msg);
 	}
 
 	nlClose(sock);
