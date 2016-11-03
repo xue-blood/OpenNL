@@ -12,6 +12,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="client_tcp.c" />
+    <ClCompile Include="client_udp.c" />
+    <ClCompile Include="client_udp_io.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{82B7412D-F137-4503-AC5F-2856A56A8616}</ProjectGuid>

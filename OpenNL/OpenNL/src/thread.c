@@ -22,7 +22,6 @@ _In_	pvoid	_param)
 	pthread_t	tid;
 	pthread_create(&tid, NULL, _func, _param);
 
-	printf("%d\n",tid);
 
 	return tid;
 #endif

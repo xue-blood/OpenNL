@@ -1,10 +1,10 @@
-#include "../inc/nl_fdset.h"
+#include "../inc/nl_io.h"
 #include <stdio.h>
 
 
 void 
 nlFdInit(
-_Inout_	PNLFd	nlfd)
+_Inout_	PNLIO	nlfd)
 {
 	FD_ZERO(&nlfd->FdSet_In);
 	linkInit(&nlfd->Data);
@@ -13,19 +13,19 @@ _Inout_	PNLFd	nlfd)
 
 void
 nlFdUninit(
-_Inout_	PNLFd	nlfd)
+_Inout_	PNLIO	nlfd)
 {
 	linkClear(&nlfd->Data);
 
 }
 
 void 
-nlFdAdd(PNLFd nlfd,NLSocket fd, bool(*callback)(pvoid),pvoid param)
+nlFdAdd(PNLIO nlfd,NLSocket fd, bool(*callback)(pvoid),pvoid param)
 {
 	/*
 	 *	store callback
 	 */
-	PNLFdData f = (PNLFdData)malloc(sizeof(NlFdData));
+	PNLIOData f = (PNLIOData)malloc(sizeof(NLIOData));
 	f->Callback = callback;
 	f->Fd = fd;
 	f->param = param;
@@ -38,10 +38,10 @@ nlFdAdd(PNLFd nlfd,NLSocket fd, bool(*callback)(pvoid),pvoid param)
 
 void
 nlFdRemove(
-_Inout_		PNLFd		nlfd, 
+_Inout_		PNLIO		nlfd, 
 _In_		NLSocket	fd)
 {
-	PNLFdData p = (PNLFdData)nlfd->Data.BLink;
+	PNLIOData p = (PNLIOData)nlfd->Data.BLink;
 	while (!linkIsHead(p,&nlfd->Data))
 	{
 		if (p->Fd == fd)
@@ -51,29 +51,29 @@ _In_		NLSocket	fd)
 			return;
 		}
 
-		p = (PNLFdData)p->_link.BLink;
+		p = (PNLIOData)p->_link.BLink;
 	}
 }
 
-void nlFdReload(PNLFd nlfd)
+void nlFdReload(PNLIO nlfd)
 {
 	FD_ZERO(&nlfd->FdSet_In);
 
 	int max = 0;
-	PNLFdData p = (PNLFdData)nlfd->Data.BLink;
+	PNLIOData p = (PNLIOData)nlfd->Data.BLink;
 	while (!linkIsHead(p, &nlfd->Data))
 	{
 		if (p->Fd > max) max = p->Fd;
 		FD_SET(p->Fd, &nlfd->FdSet_In);
 
-		p = (PNLFdData)p->_link.BLink;
+		p = (PNLIOData)p->_link.BLink;
 	}
 
 	nlfd->MaxFd = max + 1;
 }
 
 void 
-nlFdLoop(_In_ PNLFd nlfd)
+nlFdLoop(_In_ PNLIO nlfd)
 {
 
 	while (true)
@@ -92,7 +92,7 @@ nlFdLoop(_In_ PNLFd nlfd)
 
 		//printf("select [ %d ]ok.\n",status);
 
-		PNLFdData p = (PNLFdData)nlfd->Data.BLink;
+		PNLIOData p = (PNLIOData)nlfd->Data.BLink;
 		while (!linkIsHead(p, &nlfd->Data))
 		{
 			if (FD_ISSET(p->Fd, &nlfd->FdSet_In))
@@ -104,7 +104,7 @@ nlFdLoop(_In_ PNLFd nlfd)
 
 					if (!ret)
 					{
-						PNLFdData next = (PNLFdData)p->_link.BLink;
+						PNLIOData next = (PNLIOData)p->_link.BLink;
 						nlFdRemove(nlfd, p->Fd);
 						p = next;
 						continue;
@@ -112,7 +112,7 @@ nlFdLoop(_In_ PNLFd nlfd)
 				}
 			}
 			
-			p=(PNLFdData)p->_link.BLink;
+			p=(PNLIOData)p->_link.BLink;
 		}
 
 		//printf("one loop end.\n");

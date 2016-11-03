@@ -11,7 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="server_tcp.c" />
     <ClCompile Include="server_tcp_io.c" />
+    <ClCompile Include="server_tcp_ps.c" />
+    <ClCompile Include="server_tcp_td.c" />
+    <ClCompile Include="server_tcp_tsd.c" />
+    <ClCompile Include="server_udp.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E88D8130-16B4-4E90-BEF7-D8C8852C14B0}</ProjectGuid>

@@ -24,7 +24,7 @@ _In_	int		_backlog)
 	/*
 	 *	set sock address
 	 */
-	nlSockAddr4(addr, _af, INADDR_ANY, _port);
+	nlSockAddrex4(addr, _af, INADDR_ANY, _port);
 
 
 	/*
@@ -111,7 +111,7 @@ _In_	short	_port)
 	/*
 	*	set sock address
 	*/
-	nlSockAddr4(addr, _af, INADDR_ANY, _port);
+	nlSockAddrex4(addr, _af, INADDR_ANY, _port);
 
 
 	/*

@@ -5,7 +5,6 @@
 
 #include <stdio.h>
 #include <string.h>
-#include "../OpenNL/inc/nl_fdset.h"
 
 NLSocket _sock;
 NLSockAddr4 _Addr;
@@ -50,14 +49,12 @@ bool main(int argc,char ** argv)
 	/*
 	 *	my socket addr
 	 */
-	nlSockAddr4(myaddr, AF_INET, 0, atoi(argv[1]));
-	inet_pton(AF_INET, "127.0.0.1", &myaddr.sin_addr);
+	nlSockAddr4(myaddr, AF_INET, "127.0.0.1", atoi(argv[1]));
 	
 	/*
 	 *	peer socket addr
 	 */
-	nlSockAddr4(peeraddr, AF_INET, 0, atoi(argv[2]));
-	inet_pton(AF_INET, "127.0.0.1", &peeraddr.sin_addr);
+	nlSockAddr4(peeraddr, AF_INET, "127.0.0.1", atoi(argv[2]));
 
 
 	/*
@@ -72,7 +69,7 @@ bool main(int argc,char ** argv)
 	_sock = sock;
 	_Addr = peeraddr;
 
-	NLFd nlfd;
+	NLIO nlfd;
 
 	nlFdInit(&nlfd);
 

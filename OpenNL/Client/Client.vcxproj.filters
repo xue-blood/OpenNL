@@ -18,5 +18,11 @@
     <ClCompile Include="client_tcp.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="client_udp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="client_udp_io.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

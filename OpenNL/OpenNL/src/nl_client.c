@@ -20,11 +20,8 @@ _In_	short	_port)
 	nlSocket(sock,_af,_type,_proto);
 
 	// set addr
-	nlSockAddr4(addr, _af, 0, _port);
-	inet_pton(_af,_ip,&addr.sin_addr);
+	nlSockAddr4(addr, _af, _ip, _port);
 
-
-	
 
 	_NL_Socket_To_Server	= sock;
 	memcpy(&_NL_Addr_To_Server, &addr, sizeof(addr));

@@ -6,7 +6,7 @@
 
 #define PORT 9000
 
-NLFd   _FD;
+NLIO   _FD;
 
 void convert(char *msg, char * t_msg, int len)
 {

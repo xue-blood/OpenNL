@@ -18,5 +18,20 @@
     <ClCompile Include="server_tcp_io.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="server_tcp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="server_tcp_ps.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="server_tcp_td.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="server_tcp_tsd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="server_udp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

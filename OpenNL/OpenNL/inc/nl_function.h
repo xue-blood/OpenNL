@@ -39,11 +39,17 @@ bool	nlInit(_In_	int  v_maj, _In_	int  v_sub);
 				_NL_Current_Status = NL_Socket_Create_Failed;	\
 				return false;									\
 			}
-#define nlSockAddr4(name,af,ip,port)				\
+#define nlSockAddrex4(name,af,ip,port)				\
 			NLSockAddr4 name = { 0 };				\
 			name.sin_family = af;				\
 			name.sin_addr.s_addr = ip;			\
 			name.sin_port = htons(port);
+
+#define nlSockAddr4(name,af,ip,port)				\
+			NLSockAddr4 name = { 0 };				\
+			name.sin_family = af;				\
+			name.sin_port = htons(port);		\
+			inet_pton(af,ip,&name.sin_addr);
 
 /*
  *	see nl_error.c

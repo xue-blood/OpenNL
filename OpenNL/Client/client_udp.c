@@ -14,8 +14,7 @@ void main()
 
 	nlSocket(sock, AF_INET, SOCK_DGRAM, 0);
 
-	nlSockAddr4(addr, AF_INET, 0, PORT);
-	inet_pton(AF_INET, "127.0.0.1", &addr.sin_addr);
+	nlSockAddr4(addr, AF_INET, "127.0.0.1", PORT);
 
 	char	s_buff[100];
 	while (true)

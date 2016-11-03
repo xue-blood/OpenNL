@@ -45,7 +45,7 @@
     <ClInclude Include="inc\thread.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="inc\nl_fdset.h">
+    <ClInclude Include="inc\nl_io.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -77,7 +77,7 @@
     <ClCompile Include="src\thread.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\nl_fdset.c">
+    <ClCompile Include="src\nl_io.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
