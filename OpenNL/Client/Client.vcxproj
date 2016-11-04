@@ -11,9 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="client_tcp.c" />
-    <ClCompile Include="client_udp.c" />
-    <ClCompile Include="client_udp_io.c" />
+    <ClCompile Include="host.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{82B7412D-F137-4503-AC5F-2856A56A8616}</ProjectGuid>
@@ -57,7 +55,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

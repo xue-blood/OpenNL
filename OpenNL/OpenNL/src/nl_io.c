@@ -1,6 +1,5 @@
-#include "../inc/nl_io.h"
 #include <stdio.h>
-
+#include "../inc/nl.h"
 
 void 
 nlFdInit(
@@ -117,7 +116,4 @@ nlFdLoop(_In_ PNLIO nlfd)
 
 		//printf("one loop end.\n");
 	}
-
-_select_end:
-	printf("select end.\n");
 }

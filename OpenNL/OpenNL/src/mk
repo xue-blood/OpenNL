@@ -1,14 +1,16 @@
 echo "compile use gcc"
 gcc -c link.c			-o link.o
-gcc -c ps.c			-o ps.o
+gcc -c ps.c			    -o ps.o
 gcc -c thread.c			-o thread.o
-gcc -c nl.c			-o nl.o
-gcc -c nl_callback.c		-o nl_callback.o
+gcc -c nl.c			    -o nl.o
+gcc -c nl_callback.c	-o nl_callback.o
 gcc -c nl_client.c		-o nl_client.o
 gcc -c nl_error.c		-o nl_error.o
 gcc -c nl_server.c		-o nl_server.o
 gcc -c nl_socket.c		-o nl_socket.o
-gcc -c nl_fdset.c		-o nl_fdset.o
+gcc -c nl_io.c		    -o nl_io.o
+gcc -c nl_dns.c         -o nl_dns.o
+
 #
 echo "build static library"
 ar rcs nl.a	*.o

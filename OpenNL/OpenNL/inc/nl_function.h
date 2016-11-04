@@ -78,4 +78,17 @@ void	nlFuncAcceptSuccess(_In_	bool(*callback)(NLSocket sock, PNLSockAddr addr));
 void	nlFuncConnectSuccess(_In_	bool(*callback)(NLSocket sock, PNLSockAddr addr));
 void	nlFuncConnectFail(_In_	bool(*callback)(NLSocket sock, PNLSockAddr addr));
 
+/*
+ *	io
+ */
+void	nlFdInit(_Inout_	PNLIO	nlfd);
+void	nlFdUninit(_Inout_	PNLIO	nlfd);
+void	nlFdAdd(_Inout_	PNLIO	nlfd, NLSocket fd, bool(*callback)(pvoid), pvoid param);
+void	nlFdRemove(_Inout_		PNLIO		nlfd, _In_		NLSocket	fd);
+void	nlFdLoop(_In_	PNLIO	nlfd);
+
+/*
+ *	get host information see nl_dns.c
+ */
+PNLHost nlHsName(char * name);
 #endif
